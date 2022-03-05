@@ -1,0 +1,18 @@
+Nutné funkce:
+- evidence killů a smrtí jednotlivých hráčů
+- evidence všech balíčků, pointů...
+- zadání killu, pointu, balíčku pro hráče
+- zviditelnění balíčků a pointů vybraným hráčům
+	- nástěnka, kde má hráč souřadnice všech relevantních pointů a balíčků
+- přihlášení pro hráče, každý hráč má svůj účet
+
+Bylo by pěkné:
+- ověření killu	
+	- tomu, koho jsem zadal do killu se zobrazí zpráva, kterou musí potvrdit
+- viditelné statistiky pro hráče i adminy
+	- počet smrtí, killů, vyzvednutých balíčků...
+- vybírání killu podle fotky
+
+Není potřeba:
+- zobrazování pointů a balíčků na mapě
+- achievmenty
