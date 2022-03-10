@@ -1,5 +1,5 @@
 Nutné funkce:
-- evidence killů a smrtí jednotlivých hráčů
+- evidence killů a smrtí jednotlivých hráčů (+ real time report)
 - evidence všech balíčků, pointů...
 - zadání killu, pointu, balíčku pro hráče
 - zviditelnění balíčků a pointů vybraným hráčům
@@ -12,6 +12,7 @@ Bylo by pěkné:
 - viditelné statistiky pro hráče i adminy
 	- počet smrtí, killů, vyzvednutých balíčků...
 - vybírání killu podle fotky
+- poloha hráčů pro adminy (detekce skupin)
 
 Není potřeba:
 - zobrazování pointů a balíčků na mapě
