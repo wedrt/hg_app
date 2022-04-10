@@ -1,5 +1,6 @@
 from django.db import models
 from json import dumps, loads
+from django.contrib.auth.models import User
 
 
 class Package(models.Model):
@@ -25,3 +26,33 @@ class Point(models.Model):
 
     def get_codes(self):
         return loads(self.codes)
+
+
+class Message(models.Model):
+    text = models.CharField(max_length=300)
+    brief = models.CharField(max_length=20)
+    time = models.TimeField(auto_now=True)
+
+    def __str__(self):
+        return self.brief
+
+
+
+
+
+class Player(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    lives = models.IntegerField()
+
+    def __str__(self):
+        return self.user.username
+
+
+class Kill(models.Model):
+    killer = models.ManyToManyField(Player)
+    victim = models.ManyToManyField(Player)
+    stealth_kill = models.BooleanField()
+    time = models.TimeField(auto_now=True)
+
+
+

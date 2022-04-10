@@ -1,0 +1,19 @@
+{% extends "hg_app/header.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %} 
+
+{% load crispy_forms_tags %}         
+
+<!--Register--> 
+<div class="container py-5">
+	<h1>Registrace nového hráče</h1>
+	<form method="POST">
+		{% csrf_token %}
+		{{ register_form| crispy }}
+		<button class="btn btn-primary" type="submit">Registrovat se</button>
+	</form>
+	<p class="text-center">Pokud už máš účet, <a href="/login">přihlas se</a>.</p>
+</div>
+
+{% endblock %}
