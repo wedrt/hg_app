@@ -52,7 +52,7 @@ class Player(models.Model):
     points = models.ManyToManyField(Point)
     packages = models.ManyToManyField(Package)
     messages = models.ManyToManyField(Message)
-    kills = models.ForeignKey(Kill, on_delete=models.CASCADE)
+    kills = models.ManyToManyField(Kill)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
