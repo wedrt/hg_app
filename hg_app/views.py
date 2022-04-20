@@ -13,12 +13,9 @@ def index(request):
         form = SubmitKill(request.POST)
         kill = Kill()
         kill.victim = Player.objects.get(id=form.data['victim'])
+        kill.murderer = Player.objects.get(user=request.user)
         kill.stealth_kill = form.data.get('stealth_kill', False)
         kill.save()
-        current_player = Player.objects.get(user=request.user)
-        print(current_player)
-        current_player.kills.add(kill)
-        current_player.save()
         messages.info(request, f"Kill zadán.")
         return redirect("hg_app:index")
     else:

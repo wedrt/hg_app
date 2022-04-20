@@ -38,7 +38,8 @@ class Message(models.Model):
 
 
 class Kill(models.Model):
-    victim = models.ForeignKey('Player', on_delete=models.CASCADE, related_name='victim', default='')
+    murderer = models.ForeignKey('Player', on_delete=models.CASCADE, related_name='killed_victims')
+    victim = models.ForeignKey('Player', on_delete=models.CASCADE, related_name='murdered_by')
     stealth_kill = models.BooleanField()
     time = models.TimeField(auto_now=True)
 
@@ -49,10 +50,11 @@ class Kill(models.Model):
 class Player(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     lives = models.IntegerField()
-    points = models.ManyToManyField(Point)
-    packages = models.ManyToManyField(Package)
-    messages = models.ManyToManyField(Message)
-    kills = models.ManyToManyField(Kill)
+    points = models.ManyToManyField(Point, blank=True)
+    packages = models.ManyToManyField(Package, blank=True)
+    messages = models.ManyToManyField(Message, blank=True)
+
+    #score = models.IntegerField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="972c4fdc-dd5f-460a-a1a0-8d8fff89651f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/hg_app/migrations/0007_remove_player_kills_kill_murderer_alter_kill_victim_and_more.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hg/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hg/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hg_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hg_app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hg_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hg_app/templates/hg_app/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/templates/hg_app/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hg_app/templates/hg_app/includes/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/templates/hg_app/includes/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hg_app/templates/hg_app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/templates/hg_app/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hg_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +26,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -47,7 +49,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.django.DjangoModulesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
     <configuration name="hg" type="Python.DjangoServer" factoryName="Django server">
@@ -89,6 +91,8 @@
       <workItem from="1649754679127" duration="6720000" />
       <workItem from="1649789598109" duration="6160000" />
       <workItem from="1650388075385" duration="467000" />
+      <workItem from="1650450228076" duration="1279000" />
+      <workItem from="1650471246277" duration="2203000" />
     </task>
     <servers />
   </component>
