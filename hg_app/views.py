@@ -8,19 +8,11 @@ from .models import Kill, Player
 from django.contrib.auth.models import User
 
 
-def index(request):
-    if request.method == "POST":
-        form = SubmitKill(request.POST)
-        kill = Kill()
-        kill.victim = Player.objects.get(id=form.data['victim'])
-        kill.murderer = Player.objects.get(user=request.user)
-        kill.stealth_kill = form.data.get('stealth_kill', False)
-        kill.save()
-        messages.info(request, f"Kill zadán.")
-        return redirect("hg_app:index")
-    else:
-        form = SubmitKill()
-        return render(request=request, template_name='hg_app/index.html', context={'submit_kill': form})
+def index(request, submit_kill_form=None):
+    if submit_kill_form is None:
+        submit_kill_form = SubmitKill()
+
+    return render(request=request, template_name='hg_app/index.html', context=locals())
 
 
 def register_request(request):
@@ -60,4 +52,14 @@ def logout_request(request):
     messages.info(request, "Odhlášení proběhlo úspěšně")
     return redirect("hg_app:index")
 
-# def kill_request(request):
+def submit_kill(request):
+    assert request.method == "POST"
+
+    submit_kill_form = SubmitKill(request.POST)
+    Kill.objects.create(
+        victim=Player.objects.get(id=submit_kill_form.data['victim']),
+        murderer=request.user.player,
+        stealth_kill=submit_kill_form.data.get('stealth_kill', False)
+    )
+    messages.info(request, f"Kill zadán.")
+    return index(request, submit_kill_form=submit_kill_form)

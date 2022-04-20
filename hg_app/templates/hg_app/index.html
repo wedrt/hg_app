@@ -15,9 +15,9 @@
      {% if user.is_authenticated %}
 
        <h3>Zadat kill</h3>
-        <form method="POST">
+        <form method="POST" action="{% url 'hg_app:submit_kill' %}">
         {% csrf_token %}
-            {{ submit_kill|crispy }}
+            {{ submit_kill_form|crispy }}
          <button class="btn btn-primary" type="submit">Odeslat</button>
         </form>
 

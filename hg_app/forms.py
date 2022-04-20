@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
+from django.template.defaultfilters import safe
+
 from .models import Player
 
 
@@ -49,6 +51,11 @@ class LoginForm(AuthenticationForm):
         widget=forms.TextInput(attrs={'autofocus': True})
     )
     password = forms.CharField(label='Heslo', widget=forms.PasswordInput, required=True)
+
+
+# class PlayerModelChoiceField(forms.ModelChoiceField):
+#     def label_from_instance(self, obj):
+#          return safe(f'<img src={self.image.url}/>')
 
 
 class SubmitKill(forms.Form):
