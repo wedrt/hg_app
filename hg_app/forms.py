@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
+from .models import Player
 
 
 class NewUserForm(UserCreationForm):
@@ -48,3 +49,10 @@ class LoginForm(AuthenticationForm):
         widget=forms.TextInput(attrs={'autofocus': True})
     )
     password = forms.CharField(label='Heslo', widget=forms.PasswordInput, required=True)
+
+
+class SubmitKill(forms.Form):
+    victim = forms.ModelChoiceField(Player.objects, label='Oběť')
+    stealth_kill = forms.BooleanField(label='Stealth kill', required=False)
+
+

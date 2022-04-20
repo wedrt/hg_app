@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Package(models.Model):
-    id = models.AutoField(primary_key=True)
+    # id = models.AutoField(primary_key=True)
     long = models.DecimalField(max_digits=9, decimal_places=6)
     lat = models.DecimalField(max_digits=9, decimal_places=6)
     description = models.CharField(max_length=100)
@@ -13,7 +13,7 @@ class Package(models.Model):
 
 
 class Point(models.Model):
-    id = models.AutoField(primary_key=True)
+    # id = models.AutoField(primary_key=True)
     long = models.DecimalField(max_digits=9, decimal_places=6)
     lat = models.DecimalField(max_digits=9, decimal_places=6)
     description = models.CharField(max_length=100)
@@ -37,22 +37,30 @@ class Message(models.Model):
         return self.brief
 
 
+class Kill(models.Model):
+    victim = models.ForeignKey('Player', on_delete=models.CASCADE, related_name='victim', default='')
+    stealth_kill = models.BooleanField()
+    time = models.TimeField(auto_now=True)
 
+    def __str__(self):
+        return f"{self.victim.user.username} was killed"
 
 
 class Player(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     lives = models.IntegerField()
+    points = models.ManyToManyField(Point)
+    packages = models.ManyToManyField(Package)
+    messages = models.ManyToManyField(Message)
+    kills = models.ForeignKey(Kill, on_delete=models.CASCADE)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.lives = 3
 
     def __str__(self):
         return self.user.username
 
-
-class Kill(models.Model):
-    killer = models.ManyToManyField(Player)
-    victim = models.ManyToManyField(Player)
-    stealth_kill = models.BooleanField()
-    time = models.TimeField(auto_now=True)
 
 
 

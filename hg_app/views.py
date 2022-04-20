@@ -1,13 +1,29 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .forms import NewUserForm, LoginForm
+from .forms import NewUserForm, LoginForm, SubmitKill
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
+from .models import Kill, Player
+from django.contrib.auth.models import User
 
 
 def index(request):
-    return render(request=request, template_name="hg_app/index.html")
+    if request.method == "POST":
+        form = SubmitKill(request.POST)
+        kill = Kill()
+        kill.victim = Player.objects.get(id=form.data['victim'])
+        kill.stealth_kill = form.data.get('stealth_kill', False)
+        kill.save()
+        current_player = Player.objects.get(user=request.user)
+        print(current_player)
+        current_player.kills.add(kill)
+        current_player.save()
+        messages.info(request, f"Kill zadán.")
+        return redirect("hg_app:index")
+    else:
+        form = SubmitKill()
+        return render(request=request, template_name='hg_app/index.html', context={'submit_kill': form})
 
 
 def register_request(request):
@@ -46,3 +62,5 @@ def logout_request(request):
     logout(request)
     messages.info(request, "Odhlášení proběhlo úspěšně")
     return redirect("hg_app:index")
+
+# def kill_request(request):

@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="972c4fdc-dd5f-460a-a1a0-8d8fff89651f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/hg.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hg.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/templates/hg_app/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/templates/hg_app/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/templates/hg_app/includes/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/templates/hg_app/includes/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/templates/hg_app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/templates/hg_app/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +85,10 @@
       <workItem from="1649184555376" duration="370000" />
       <workItem from="1649186334875" duration="4996000" />
       <workItem from="1649578043656" duration="9499000" />
-      <workItem from="1649589269252" duration="3013000" />
+      <workItem from="1649589269252" duration="13403000" />
+      <workItem from="1649754679127" duration="6720000" />
+      <workItem from="1649789598109" duration="6160000" />
+      <workItem from="1650388075385" duration="467000" />
     </task>
     <servers />
   </component>
