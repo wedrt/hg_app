@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
+from django.forms import ModelChoiceField
 from django.template.defaultfilters import safe
 
 from .models import Player
@@ -59,7 +60,24 @@ class LoginForm(AuthenticationForm):
 
 
 class SubmitKill(forms.Form):
-    victim = forms.ModelChoiceField(Player.objects, label='Oběť')
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(SubmitKill, self).__init__(*args, **kwargs)
+        self.fields['victim'].queryset = Player.objects.exclude(user=self.user)
+
+    victim = forms.ModelChoiceField(Player.objects.none(), label='Oběť', empty_label="Vyber, koho jsi zabil(a)")
     stealth_kill = forms.BooleanField(label='Stealth kill', required=False)
 
 
+class MyModelChoiceField(ModelChoiceField):
+    def label_from_instance(self, obj):
+        return f"Balíček #{obj.id}"
+
+class SubmitPackage(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(SubmitPackage, self).__init__(*args, **kwargs)
+        self.fields['package_id'].queryset = self.user.player.packages.exclude(picked_up=True).all()
+
+    package_id = MyModelChoiceField(queryset=Player.objects.none(), label="ID balíčku",
+                                        empty_label="Vyber, jaký balíček jsi našel/našla")

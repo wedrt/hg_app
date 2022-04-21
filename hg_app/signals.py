@@ -13,9 +13,9 @@ def create_player(instance, created, **kwargs):
         )
 
 
-# @receiver(post_save, sender=Kill)
-# def remove_live(instance, created, **kwargs):
-#     if created:
-#         victim = instance.victim
-#         victim.lives -= 1
-#         victim.save()
+@receiver(post_save, sender=Kill)
+def remove_live(instance, created, **kwargs):
+    if created:
+        victim = instance.victim
+        victim.lives -= 1
+        victim.save()

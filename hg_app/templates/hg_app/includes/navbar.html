@@ -14,14 +14,19 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Přihlášený hráč: {{user.username}}</a>
       </li>
+          </ul>
+
+              <span class="navbar-text"> Aktuální počet životů: <b>{{ player_lives }}</b></span>
 
       {% else %}
 
       <li class="nav-item">
         <a class="nav-link" href="/login">Přihlásit se</a>
       </li>
+              </ul>
 
       {% endif %}
-    </ul>
+
+
   </div>
 </nav>

@@ -10,6 +10,9 @@ class Package(models.Model):
     opening_time = models.DateTimeField()
     picked_up = models.BooleanField()
 
+    def __str__(self):
+        return f"Package {self.id}"
+
 
 class Point(models.Model):
     long = models.DecimalField(max_digits=9, decimal_places=6)
