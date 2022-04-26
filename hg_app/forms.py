@@ -63,7 +63,7 @@ class SubmitKill(forms.Form):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(SubmitKill, self).__init__(*args, **kwargs)
-        self.fields['victim'].queryset = Player.objects.exclude(user=self.user)
+        self.fields['victim'].queryset = Player.objects.exclude(user=self.user).exclude(lives=0)
 
     victim = forms.ModelChoiceField(Player.objects.none(), label='Oběť', empty_label="Vyber, koho jsi zabil(a)")
     stealth_kill = forms.BooleanField(label='Stealth kill', required=False)
@@ -73,11 +73,12 @@ class MyModelChoiceField(ModelChoiceField):
     def label_from_instance(self, obj):
         return f"Balíček #{obj.id}"
 
+
 class SubmitPackage(forms.Form):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(SubmitPackage, self).__init__(*args, **kwargs)
-        self.fields['package_id'].queryset = self.user.player.packages.exclude(picked_up=True).all()
+        self.fields['package_id'].queryset = self.user.player.packages.exclude(picked_up=self.user.player).all()
 
     package_id = MyModelChoiceField(queryset=Player.objects.none(), label="ID balíčku",
-                                        empty_label="Vyber, jaký balíček jsi našel/našla")
+                                    empty_label="Vyber, jaký balíček jsi našel/našla", required=False)

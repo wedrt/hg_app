@@ -2,15 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="972c4fdc-dd5f-460a-a1a0-8d8fff89651f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/hg_app/migrations/0009_alter_package_picked_up.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hg_app/migrations/0011_player_score_alter_message_time.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hg_app/templates/hg_app/players.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hg_app/templates/hg_app/rules.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hg_app/templates/hg_app/stats.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hg_app/values.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hg_app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hg_app/migrations/0007_remove_player_kills_kill_murderer_and_more.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/migrations/0008_alter_kill_murderer_alter_kill_stealth_kill_and_more.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hg_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hg_app/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/signals.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hg_app/templates/hg_app/includes/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/templates/hg_app/includes/navbar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hg_app/templates/hg_app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/templates/hg_app/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hg_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hg_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +106,13 @@
       <workItem from="1650388075385" duration="467000" />
       <workItem from="1650450228076" duration="1279000" />
       <workItem from="1650471246277" duration="2203000" />
-      <workItem from="1650480149010" duration="6897000" />
+      <workItem from="1650480149010" duration="7498000" />
+      <workItem from="1650812492024" duration="2106000" />
+      <workItem from="1650814991240" duration="2479000" />
+      <workItem from="1650828332307" duration="3388000" />
+      <workItem from="1650910846697" duration="601000" />
+      <workItem from="1650962103300" duration="10124000" />
+      <workItem from="1650989212469" duration="10666000" />
     </task>
     <servers />
   </component>

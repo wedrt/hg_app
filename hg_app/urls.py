@@ -1,4 +1,8 @@
 from django.urls import path
+from . import views
+from hg import settings
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from . import views
 
@@ -9,4 +13,10 @@ urlpatterns = [
     path("logout", views.logout_request, name= "logout"),
     path("submit_kill", views.submit_kill, name= "submit_kill"),
     path("submit_package", views.submit_package, name= "submit_package"),
+    path("rules", views.rules, name="rules"),
+    path("stats", views.stats, name="stats"),
+    path("players", views.players, name="players"),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

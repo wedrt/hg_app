@@ -21,7 +21,7 @@ class MyDeathsAdmin(admin.TabularInline):
 @admin.register(Player)
 class PlayerAdmin(admin.ModelAdmin):
     search_fields = 'user__username',
-    list_display = 'user', 'lives'
+    list_display = 'user', 'lives','score'
     list_filter = 'lives',
 
     inlines = [MyKillsAdmin, MyDeathsAdmin]
