@@ -7,8 +7,8 @@ from datetime import datetime, timedelta
 
 
 class Package(models.Model):
-    long = models.DecimalField(max_digits=9, decimal_places=6)
-    lat = models.DecimalField(max_digits=9, decimal_places=6)
+    lat = models.DecimalField(max_digits=9, decimal_places=6, verbose_name="latitude (N)")
+    long = models.DecimalField(max_digits=9, decimal_places=6, verbose_name="longitude (E)")
     description = models.CharField(max_length=100, blank=True)
     opening_time = models.DateTimeField()
     picked_up = models.ForeignKey('Player', on_delete=models.SET_NULL, blank=True, null=True)
@@ -18,8 +18,8 @@ class Package(models.Model):
 
 
 class Point(models.Model):
-    lat = models.DecimalField(max_digits=9, decimal_places=6)
-    long = models.DecimalField(max_digits=9, decimal_places=6)
+    lat = models.DecimalField(max_digits=9, decimal_places=6, verbose_name="latitude (N)")
+    long = models.DecimalField(max_digits=9, decimal_places=6, verbose_name="longitude (E)")
     description = models.CharField(max_length=100)
     opening_time = models.DateTimeField()
     codes = models.CharField(max_length=200)

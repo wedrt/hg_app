@@ -69,12 +69,14 @@ def submit_kill(request):
     assert request.method == "POST"
 
     submit_kill_form = SubmitKill(request.POST, user=request.user)
-    Kill.objects.create(
-        victim=Player.objects.get(id=submit_kill_form.data['victim']),
-        murderer=request.user.player,
-        stealth_kill=submit_kill_form.data.get('stealth_kill', False)
-    )
-    messages.info(request, f"Kill zadán.")
+    if submit_kill_form.is_valid():
+        Kill.objects.create(
+            victim=submit_kill_form.cleaned_data['victim'],
+            murderer=request.user.player,
+            stealth_kill=submit_kill_form.cleaned_data['stealth_kill'],
+            time=datetime.now()
+        )
+        messages.info(request, f"Kill zadán.")
     return index(request, submit_kill_form=submit_kill_form)
 
 
@@ -106,5 +108,7 @@ def stats(request):
 def players(request):
     players = Player.objects.exclude(user=request.user).exclude(lives=0).all()
     players_count = len(players)
+    dead_players = Player.objects.filter(lives=0).all()
+    dead_players_count = len(dead_players)
     return render(request=request, template_name="hg_app/players.html", context=locals())
 

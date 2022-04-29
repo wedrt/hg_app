@@ -55,7 +55,7 @@
         <table class="table table-striped table-sm">
             {% for death in deaths %}
                 <tr>
-                    <td>#{{ death.murdered_id }}</td>
+                    <td>{{ death.murdered }}</td>
                     <td>{{ death.time | date:'H:i' }}</td>
                 </tr>
             {% endfor %}

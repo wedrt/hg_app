@@ -7,7 +7,7 @@
         {% else %}
             <div class="container py-5">
 
-                <h2>Hráči</h2>
+                <h2>Živí hráči</h2>
             </div>
             <div class="container py-5">
 
@@ -23,7 +23,30 @@
                         </tr>
                     {% endfor %}
                 </table>
-                <h5><b>Zbývá hráčů: {{ players_count }}</b></h5>
+                <h5><b>Zbývá hráčů (kromě tebe): {{ players_count }}</b></h5>
+
+
+            </div>
+
+                <div class="container py-5">
+
+                <h2>Mrtví hráči</h2>
+            </div>
+            <div class="container py-5">
+
+                <table class="table table-striped">
+                    {% for dead_player in dead_players %}
+                        <tr>
+                            <td>{{ dead_player }}</td>
+                            <td>
+                                {% if dead_player.photo %}
+                                    <img src="{{ dead_player.photo.url }}" height="100">
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <h5><b>Už zemřelo hráčů: {{ dead_players_count }}</b></h5>
 
 
             </div>

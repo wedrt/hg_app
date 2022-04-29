@@ -9,53 +9,61 @@
             <h4>Pro používání HG webové aplikace se musíš přihlásit</h4>
         {% else %}
             <div class="container">
-                <h4>Aktuální počet životů: <b>{{ player_lives }}</b></h4>
-            </div>
-            <div class="container py-5">
-                <h4>Zprávy</h4>
-                <table class="table table-striped">
+                {% if player_lives > 0 %}
+                    <h4>Aktuální počet životů: <b>{{ player_lives }}</b></h4>
 
-                {% for message in info_messages %}
-                    <tr>
-                        <td>{{ message.time | date:'H:i' }}</td>
-                        <td>{{ message.text }}</td>
-                    </tr>
-                {% endfor %}
-                </table>
-            </div>
-            <div class="container py-5">
-                <h4>Zadat kill</h4>
-                <form method="POST" action="{% url 'hg_app:submit_kill' %}">
-                    {% csrf_token %}
-                    {{ submit_kill_form|crispy }}
-                    <button class="btn btn-primary" type="submit">Odeslat</button>
-                </form>
-            </div>
-            <div class="container py-5">
-                <h4>Zadat nalezený balíček</h4>
-                <form method="POST" action="{% url 'hg_app:submit_package' %}">
-                    {% csrf_token %}
-                    {{ submit_package_form|crispy }}
-                    <button class="btn btn-primary" type="submit">Odeslat</button>
-                </form>
-            </div>
-            <div class="container py-5">
-                <h4>Dostupné balíčky</h4>
-                <table class="table table-striped">
-                <th scope="col">Balíček</th>
-                <th scope="col">Souřadnice</th>
-                <th scope="col">Čas otevření</th>
+                    </div>
+                    <div class="container py-5">
+                        <h4>Zprávy</h4>
+                        <table class="table table-striped">
 
-                {% for package in packages %}
-                    <tr>
-                        <td>#{{ package.id }}</td>
-                        <td><a href="https://mapy.cz/turisticka?x={{ package.long }}&y={{ package.lat }}&z=17&source=coor&id={{ package.long }}%2C{{ package.lat }}">
-                            {{ package.lat }}N, {{ package.long }}E</a></td>
-                        <td>{{ package.opening_time | date:'H:i'}}</td>
-                    </tr>
-                {% endfor %}
-                </table>
-            </div>
+                            {% for message in info_messages %}
+                                <tr>
+                                    <td>{{ message.time | date:'H:i' }}</td>
+                                    <td>{{ message.text }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div class="container py-5">
+                        <h4>Zadat kill</h4>
+                        <form method="POST" action="{% url 'hg_app:submit_kill' %}">
+                            {% csrf_token %}
+                            {{ submit_kill_form|crispy }}
+                            <button class="btn btn-primary" type="submit" onclick="return confirm('Opravdu chceš zadat tento kill?')">Odeslat</button>
+                        </form>
+                    </div>
+                    <div class="container py-5">
+                        <h4>Zadat nalezený balíček</h4>
+                        <form method="POST" action="{% url 'hg_app:submit_package' %}">
+                            {% csrf_token %}
+                            {{ submit_package_form|crispy }}
+                            <button class="btn btn-primary" type="submit">Odeslat</button>
+                        </form>
+                    </div>
+                    <div class="container py-5">
+                        <h4>Dostupné balíčky</h4>
+                        <table class="table table-striped">
+                            <th scope="col">Balíček</th>
+                            <th scope="col">Souřadnice</th>
+                            <th scope="col">Čas otevření</th>
+
+                            {% for package in packages %}
+                                <tr>
+                                    <td>#{{ package.id }}</td>
+                                    <td>
+                                        <a href="https://mapy.cz/turisticka?x={{ package.long }}&y={{ package.lat }}&z=17&source=coor&id={{ package.long }}%2C{{ package.lat }}">
+                                            {{ package.lat }}N, {{ package.long }}E</a></td>
+                                    <td>{{ package.opening_time | date:'H:i' }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% else %}
+                    <h4><span class="badge badge-danger">Jsi mrtvý(á). Vrať se na základnu.</span></h4>
+                    </div>
+                {% endif %}
+
 
         {% endif %}
     </div>
