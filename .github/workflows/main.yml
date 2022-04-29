@@ -11,6 +11,7 @@ jobs:
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
+          echo "hej!!"
           echo "$SSH_KEY"
           echo "$SSH_USER"
           echo "$SSH_HOST"
