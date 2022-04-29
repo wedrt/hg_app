@@ -16,6 +16,7 @@ jobs:
           echo "$SSH_USER"
           echo "$SSH_HOST"
           echo "$SSH_KEY" > ~/.ssh/deploy.key
+          cat ~/.ssh/deploy.key
           chmod 600 ~/.ssh/deploy.key
           cat >>~/.ssh/config <<END
           Host deploy
