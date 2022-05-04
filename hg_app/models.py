@@ -3,38 +3,42 @@ from json import dumps, loads
 from django.contrib.auth.models import User
 from .values import *
 from datetime import datetime, timedelta
-
+from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point as P
 
 
 class Package(models.Model):
-    lat = models.DecimalField(max_digits=9, decimal_places=6, verbose_name="latitude (N)")
-    long = models.DecimalField(max_digits=9, decimal_places=6, verbose_name="longitude (E)")
-    description = models.CharField(max_length=100, blank=True)
+    lat = models.DecimalField(max_digits=9, decimal_places=7, verbose_name="latitude (N)")
+    long = models.DecimalField(max_digits=9, decimal_places=7, verbose_name="longitude (E)")
+    description = models.CharField(max_length=DESCRIPTION_MAX_LENGTH, blank=True)
     opening_time = models.DateTimeField()
     picked_up = models.ForeignKey('Player', on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
-        return f"Package {self.id}"
+        return f"Package #{self.id}"
 
 
 class Point(models.Model):
-    lat = models.DecimalField(max_digits=9, decimal_places=6, verbose_name="latitude (N)")
-    long = models.DecimalField(max_digits=9, decimal_places=6, verbose_name="longitude (E)")
-    description = models.CharField(max_length=100)
+    lat = models.DecimalField(max_digits=9, decimal_places=7, verbose_name="latitude (N)")
+    long = models.DecimalField(max_digits=9, decimal_places=7, verbose_name="longitude (E)")
+    location = models.PointField(default=P(0.0, 0.0))
+    description = models.CharField(max_length=DESCRIPTION_MAX_LENGTH, blank=True)
     opening_time = models.DateTimeField()
-    codes = models.CharField(max_length=200)
+    picked_up = models.ManyToManyField('Player', blank=True)
+    max_number_of_visits = models.IntegerField(default=0)
 
-    # using json to store the codes
-    def set_codes(self, x):
-        self.set_codes = dumps(x)
+    def __str__(self):
+        return f"Point #{self.id}"
 
-    def get_codes(self):
-        return loads(self.codes)
+    def save(self, *args, **kwargs):
+        self.location.y = self.lat
+        self.location.x = self.long
+        super(Point, self).save(*args, **kwargs)
 
 
 class Message(models.Model):
-    text = models.CharField(max_length=300)
-    brief = models.CharField(max_length=20)
+    text = models.CharField(max_length=MAX_LENGTH)
+    brief = models.CharField(max_length=BRIEF_MAX_LENGTH)
     time = models.DateTimeField()
 
     def __str__(self):
@@ -62,6 +66,3 @@ class Player(models.Model):
 
     def __str__(self):
         return self.user.username
-
-    # def lives(self):
-    #     return 3 - self.my_deaths.count()

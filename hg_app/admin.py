@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.gis.admin import OSMGeoAdmin
 
 from .models import *
 
@@ -10,6 +11,7 @@ class MyKillsAdmin(admin.TabularInline):
     verbose_name = 'My kill'
     verbose_name_plural = 'My kills'
 
+
 class MyDeathsAdmin(admin.TabularInline):
     model = Kill
     fk_name = 'victim'
@@ -18,16 +20,25 @@ class MyDeathsAdmin(admin.TabularInline):
     verbose_name_plural = 'My deaths'
 
 
+class PointAdmin(OSMGeoAdmin):
+    default_lon = -46
+    default_lat = 17
+    default_zoom = 15
+    readonly_field = 'location'
+
+
+admin.site.register(Point, PointAdmin)
+
+
 @admin.register(Player)
 class PlayerAdmin(admin.ModelAdmin):
     search_fields = 'user__username',
-    list_display = 'user', 'lives','score'
+    list_display = 'user', 'lives', 'score'
     list_filter = 'lives',
 
     inlines = [MyKillsAdmin, MyDeathsAdmin]
 
 
 admin.site.register(Package)
-admin.site.register(Point)
 admin.site.register(Kill)
 admin.site.register(Message)

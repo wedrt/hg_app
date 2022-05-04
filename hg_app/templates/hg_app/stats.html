@@ -49,14 +49,38 @@
             <h5><b>Celkově: {{ packages_count }}</b></h5>
     </div>
 
+   <div class="container py-5">
+
+        <h4>Tvoje pointy</h4>
+        <table class="table table-striped table-sm">
+            <th scope="col">Point</th>
+            <th scope="col">Čas otevření</th>
+            {% for point in points %}
+                <tr>
+                    <td>#{{ point.id }}</td>
+                    <td>{{ point.opening_time | date:'H:i' }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+            <h5><b>Celkově: {{ points_count }}</b></h5>
+    </div>
+
     <div class="container py-5">
 
         <h4>Tvoje smrti</h4>
         <table class="table table-striped table-sm">
+            <th scope="col">Útočník</th>
+            <th scope="col">Čas</th>
+            <th scope="col">Stealth kill</th>
             {% for death in deaths %}
                 <tr>
-                    <td>{{ death.murdered }}</td>
+                    <td>{{ death.murderer }}</td>
                     <td>{{ death.time | date:'H:i' }}</td>
+                    <td>
+                        {% if death.stealth_kill %}
+                            &#10003;
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
             </table>

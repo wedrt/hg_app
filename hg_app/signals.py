@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, m2m_changed
 from django.dispatch import receiver
 
 from hg_app.models import *
@@ -30,6 +30,16 @@ def add_score_kill(instance, created, **kwargs):
         else:
             murderer.score += KILL_SCORE
         murderer.save()
+
+
+@receiver(m2m_changed, sender=Point.picked_up.through)
+def add_score_point(instance, pk_set, action, **kwargs):
+    if action == "post_add":
+        for pk in pk_set:
+            player = Player.objects.get(id=pk)
+            player.score += POINT_SCORE
+            player.save()
+
 
 
 # @receiver(post_save, sender=Package)

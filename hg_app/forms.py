@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
 from django.forms import ModelChoiceField
 from django.template.defaultfilters import safe
+from datetime import datetime
 
 from .models import Player
 
@@ -54,19 +55,26 @@ class LoginForm(AuthenticationForm):
     password = forms.CharField(label='Heslo', widget=forms.PasswordInput, required=True)
 
 
-# class PlayerModelChoiceField(forms.ModelChoiceField):
-#     def label_from_instance(self, obj):
-#          return safe(f'<img src={self.image.url}/>')
-
-
 class SubmitKill(forms.Form):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(SubmitKill, self).__init__(*args, **kwargs)
-        self.fields['victim'].queryset = Player.objects.exclude(user=self.user).exclude(lives=0)
+        self.fields['victim'].queryset = Player.objects.exclude(user=self.user).exclude(lives=0).all()
 
     victim = forms.ModelChoiceField(Player.objects.none(), label='Oběť', empty_label="Vyber, koho jsi zabil(a)")
     stealth_kill = forms.BooleanField(label='Stealth kill', required=False)
+
+
+class SubmitPoint(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(SubmitPoint, self).__init__(*args, **kwargs)
+        self.fields['point_id'].queryset = self.user.player.points.exclude(picked_up__user_id__in=[self.user.id]). \
+            filter(opening_time__lt=datetime.now()).all()
+
+    point_id = ModelChoiceField(queryset=Player.objects.none(), label="ID pointu",
+                                empty_label="Vyber, jaký point jsi našel/našla", required=False,
+                                widget=forms.Select(attrs={'id': 'id_point'}))
 
 
 class MyModelChoiceField(ModelChoiceField):
@@ -78,7 +86,8 @@ class SubmitPackage(forms.Form):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(SubmitPackage, self).__init__(*args, **kwargs)
-        self.fields['package_id'].queryset = self.user.player.packages.exclude(picked_up=self.user.player).all()
+        self.fields['package_id'].queryset = self.user.player.packages.exclude(picked_up=self.user.player). \
+            filter(opening_time__lt=datetime.now()).all()
 
     package_id = MyModelChoiceField(queryset=Player.objects.none(), label="ID balíčku",
                                     empty_label="Vyber, jaký balíček jsi našel/našla", required=False)
