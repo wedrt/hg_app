@@ -16,8 +16,6 @@ from django.contrib.gis.measure import Distance as DistanceMeasure
 from geopy.distance import distance as geopy_distance
 
 
-
-
 def index(request, submit_kill_form=None, submit_package_form=None, submit_point_form=None):
     if request.user.is_authenticated:
         if submit_kill_form is None:
@@ -123,7 +121,8 @@ def submit_point(request):
         if dist.m <= MAX_DISTANCE_FROM_POINT:
             point.picked_up.add(request.user.player)
             point.save()
-            messages.info(request, f"Point úspěšně ověřen. Je teď navštíven {point.picked_up.count()}/{point.max_number_of_visits} lidí")
+            messages.info(request,
+                          f"Point úspěšně ověřen. Je teď navštíven {point.picked_up.count()}/{point.max_number_of_visits} lidí")
         else:
             messages.error(request,
                            f"Nenacházíš se dostatečně blízko. Ověř si, že jsi na správném místě.")
