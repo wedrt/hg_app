@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="95cf3e4d-3412-48f1-910b-e66ea018dcc9" name="Changes" comment="bug fixes: stealth kill, death...">
+    <list default="true" id="95cf3e4d-3412-48f1-910b-e66ea018dcc9" name="Changes" comment="little fix in urls">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hg_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hg_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/static/location.js" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/static/location.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/templates/hg_app/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/templates/hg_app/header.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +126,7 @@
       <workItem from="1651597008543" duration="8381000" />
       <workItem from="1651606141481" duration="2654000" />
       <workItem from="1651653602353" duration="13632000" />
-      <workItem from="1651908788224" duration="4643000" />
+      <workItem from="1651908788224" duration="5941000" />
     </task>
     <task id="LOCAL-00001" summary="footer">
       <created>1651220260146</created>
@@ -148,7 +149,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651227569954</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="little fix in urls">
+      <created>1652095947822</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1652095947822</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -169,6 +177,7 @@
     <MESSAGE value="footer" />
     <MESSAGE value="footer v2" />
     <MESSAGE value="bug fixes: stealth kill, death..." />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fixes: stealth kill, death..." />
+    <MESSAGE value="little fix in urls" />
+    <option name="LAST_COMMIT_MESSAGE" value="little fix in urls" />
   </component>
 </project>

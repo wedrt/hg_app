@@ -34,7 +34,7 @@ function create_post(position) {
     pos = position
     var {latitude , longitude } = pos.coords;
     $.ajax({
-        url : "/submit_point/", // the endpoint
+        url : "submit_point/", // the endpoint
         type : "POST", // http method
         data : { the_post : $('#id_point').val(),
                  lat : latitude,
