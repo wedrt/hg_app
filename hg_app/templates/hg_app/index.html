@@ -11,6 +11,7 @@
         {% else %}
             <div class="container">
                 {% if player_lives > 0 %}
+                    <div class="container py-5">
                     <h4>Aktuální počet životů: <b>{{ player_lives }}</b></h4>
 
                     </div>
@@ -31,7 +32,9 @@
                         <form method="POST" action="{% url 'hg_app:submit_kill' %}">
                             {% csrf_token %}
                             {{ submit_kill_form|crispy }}
-                            <button class="btn btn-primary" type="submit" onclick="return confirm('Opravdu chceš zadat tento kill?')">Odeslat</button>
+                            <button class="btn btn-primary" type="submit"
+                                    onclick="return confirm('Opravdu chceš zadat tento kill?')">Odeslat
+                            </button>
                         </form>
                     </div>
                     <div class="container py-5">
@@ -42,6 +45,7 @@
                             <button class="btn btn-primary" type="submit">Odeslat</button>
                         </form>
                     </div>
+
                     <div class="container py-5">
                         <h4>Dostupné balíčky</h4>
                         <table class="table table-striped">
@@ -66,9 +70,11 @@
                         <h4>Ověřit nalezený point</h4>
                         <form method="POST" action="{% url 'hg_app:submit_point' %}" id="post-form">
                             {{ submit_point_form|crispy }}
-                             <button class="btn btn-primary" type="submit" aria-describedby="pointHelpBlock">Ověřit</button>
+                            <button class="btn btn-primary" type="submit" aria-describedby="pointHelpBlock">Ověřit
+                            </button>
                             <small id="pointHelpBlock" class="form-text text-muted">
-                                Ověření probíhá na základě polohy. Point zadávej v bezprostřední vzdálenosti uvedených souřadnic.
+                                Ověření probíhá na základě polohy. Point zadávej v bezprostřední vzdálenosti uvedených
+                                souřadnic.
                             </small>
 
                         </form>
@@ -96,6 +102,66 @@
                     </div>
                 {% endif %}
 
+            <div id="map" style="width:auto; height:400px;"></div>
+            <script type="text/javascript">
+                var center = SMap.Coords.fromWGS84(17.14, 48.90);
+                var map = new SMap(JAK.gel("map"), center, 14);
+                map.addDefaultLayer(SMap.DEF_TURIST).enable();
+                map.addDefaultControls();
+
+                var packages = new SMap.Layer.Marker();
+                map.addLayer(packages);
+                packages.enable();
+
+                {% for package in packages %}
+                    /*
+                    var znacka = JAK.mel("div");
+                    var obrazek = JAK.mel("img", {src:SMap.CONFIG.img+"/marker/drop-red.png"});
+                    znacka.appendChild(obrazek);
+
+                    var popisek = JAK.mel("div", {}, {position:"absolute", left:"0px", top:"2px", textAlign:"center", width:"22px", color:"white"});
+                    popisek.innerHTML = "#{{ package.id }}";
+                    znacka.appendChild(popisek);
+                    */
+
+                    var card = new SMap.Card();
+                    card.getHeader().innerHTML = "<strong>Balíček #{{package.id}}</strong>";
+                    card.getBody().innerHTML = "Otevření: {{ package.opening_time | date:'H:i' }}<br>";
+                    card.getBody().innerHTML += "<a href=\"https://mapy.cz/turisticka?x={{ package.long }}&y={{ package.lat }}&z=17&source=coor&id={{ package.long }}%2C{{ package.lat }}\">{{ package.lat }}N, {{ package.long }}E</a>"
+
+                    var options = {
+                        title: "Balíček #{{ package.id }}",
+                        //url: znacka,
+                    };
+                    var coords = SMap.Coords.fromWGS84({{package.long}}, {{package.lat}});
+                    var marker = new SMap.Marker(coords, {{package.id}}, options);
+                    marker.decorate(SMap.Marker.Feature.Card, card);
+                    packages.addMarker(marker);
+                {% endfor %}
+                {% for point in points %}
+                    znacka = JAK.mel("div");
+                    obrazek = JAK.mel("img", {src:SMap.CONFIG.img+"/marker/drop-blue.png"});
+                    znacka.appendChild(obrazek);
+
+                    popisek = JAK.mel("div", {}, {position:"absolute", left:"0px", top:"2px", textAlign:"center", width:"22px", color:"white"});
+                    popisek.innerHTML = "#{{ point.id }}";
+                    znacka.appendChild(popisek);
+
+                    card = new SMap.Card();
+                    card.getHeader().innerHTML = "<strong>Point #{{point.id}}</strong>";
+                    card.getBody().innerHTML = "Otevření: {{ point.opening_time | date:'H:i' }}<br>";
+                    card.getBody().innerHTML += "<a href=\"https://mapy.cz/turisticka?x={{ point.long }}&y={{ point.lat }}&z=17&source=coor&id={{ point.long }}%2C{{ point.lat }}\">{{ point.lat }}N, {{ point.long }}E</a>"
+
+                    options = {
+                        title: "Point #{{ point.id }}",
+                        url: znacka,
+                    };
+                    coords = SMap.Coords.fromWGS84({{point.long}}, {{point.lat}});
+                    marker = new SMap.Marker(coords, {{point.id}}, options);
+                    marker.decorate(SMap.Marker.Feature.Card, card);
+                    packages.addMarker(marker);
+                {% endfor %}
+            </script>
 
         {% endif %}
     </div>
