@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="95cf3e4d-3412-48f1-910b-e66ea018dcc9" name="Changes" comment="static files">
+    <list default="true" id="95cf3e4d-3412-48f1-910b-e66ea018dcc9" name="Changes" comment="little fix in urls">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hg_app/templates/hg_app/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/templates/hg_app/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/static/location.js" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/static/location.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hg_app/templates/hg_app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/templates/hg_app/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/templates/hg_app/stats.html" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/templates/hg_app/stats.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hg_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/hg_app/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,9 +98,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />

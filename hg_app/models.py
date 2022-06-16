@@ -8,32 +8,39 @@ from django.contrib.gis.geos import Point as P
 
 
 class Package(models.Model):
-    lat = models.DecimalField(max_digits=9, decimal_places=7, verbose_name="latitude (N)")
-    long = models.DecimalField(max_digits=9, decimal_places=7, verbose_name="longitude (E)")
+    #lat = models.DecimalField(max_digits=9, decimal_places=7, verbose_name="latitude (N)")
+    #long = models.DecimalField(max_digits=9, decimal_places=7, verbose_name="longitude (E)")
+    location = models.PointField(srid=4326, null=True,blank=True)
     description = models.CharField(max_length=DESCRIPTION_MAX_LENGTH, blank=True)
     opening_time = models.DateTimeField()
     picked_up = models.ForeignKey('Player', on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
-        return f"Package #{self.id}"
+        return f"Balíček #{self.id}"
+
+    class Meta:
+        ordering = 'opening_time',
+        verbose_name = 'Balíček'
+        verbose_name_plural = 'Balíčky'
 
 
 class Point(models.Model):
-    lat = models.DecimalField(max_digits=9, decimal_places=7, verbose_name="latitude (N)")
-    long = models.DecimalField(max_digits=9, decimal_places=7, verbose_name="longitude (E)")
-    location = models.PointField(default=P(0.0, 0.0))
+    #lat = models.DecimalField(max_digits=9, decimal_places=7, verbose_name="latitude (N)")
+    #long = models.DecimalField(max_digits=9, decimal_places=7, verbose_name="longitude (E)")
+    location = models.PointField(srid=4326, null=True,blank=True)
     description = models.CharField(max_length=DESCRIPTION_MAX_LENGTH, blank=True)
     opening_time = models.DateTimeField()
     picked_up = models.ManyToManyField('Player', blank=True)
     max_number_of_visits = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"Point #{self.id}"
+        return f"Bod #{self.id}"
 
-    def save(self, *args, **kwargs):
-        self.location.y = self.lat
-        self.location.x = self.long
-        super(Point, self).save(*args, **kwargs)
+    class Meta:
+        ordering = 'opening_time',
+        verbose_name = 'Bod'
+        verbose_name_plural = 'Body'
+
 
 
 class Message(models.Model):
@@ -44,6 +51,11 @@ class Message(models.Model):
     def __str__(self):
         return self.brief
 
+    class Meta:
+        ordering = 'time',
+        verbose_name = 'Zpráva'
+        verbose_name_plural = 'Zprávy'
+
 
 class Kill(models.Model):
     victim = models.ForeignKey('Player', on_delete=models.CASCADE, related_name='my_deaths')
@@ -52,7 +64,7 @@ class Kill(models.Model):
     time = models.TimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.victim} was killed by {self.murderer}"
+        return f"Hráč {self.victim} byl zabit hráčem {self.murderer}"
 
 
 class Player(models.Model):

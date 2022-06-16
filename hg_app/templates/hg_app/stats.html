@@ -28,7 +28,7 @@
                 </tr>
             {% endfor %}
          </table>
-            <h5><b>Celkově: {{ kills_count }}</b></h5>
+            <h5><b>Celkově: {{ kills.count }}</b></h5>
 
 
     </div>
@@ -46,7 +46,7 @@
                 </tr>
             {% endfor %}
             </table>
-            <h5><b>Celkově: {{ packages_count }}</b></h5>
+            <h5><b>Celkově: {{ packages.count }}</b></h5>
     </div>
 
    <div class="container py-5">
@@ -62,7 +62,7 @@
                 </tr>
             {% endfor %}
             </table>
-            <h5><b>Celkově: {{ points_count }}</b></h5>
+            <h5><b>Celkově: {{ points.count }}</b></h5>
     </div>
 
     <div class="container py-5">
@@ -84,7 +84,7 @@
                 </tr>
             {% endfor %}
             </table>
-            <h5><b>Celkově: {{ deaths_count }}</b></h5>
+            <h5><b>Celkově: {{ deaths.count }}</b></h5>
     </div>
    </div>
     {% endif %}

@@ -57,8 +57,7 @@
                                 <tr>
                                     <td>#{{ package.id }}</td>
                                     <td>
-                                        <a href="https://mapy.cz/turisticka?x={{ package.long }}&y={{ package.lat }}&z=17&source=coor&id={{ package.long }}%2C{{ package.lat }}">
-                                            {{ package.lat }}N, {{ package.long }}E</a></td>
+                                        <a href="https://mapy.cz/turisticka?x={{ package.location.x }}&y={{ package.location.y }}&z=17&source=coor&id={{ package.location.x }}%2C{{ package.location.y }}">{{ package.location.y }}N, {{ package.location.x }}E</a></td>
                                     <td>{{ package.opening_time | date:'H:i' }}</td>
                                 </tr>
                             {% endfor %}
@@ -69,8 +68,10 @@
                     <div class="container py-5">
                         <h4>Ověřit nalezený point</h4>
                         <form method="POST" action="{% url 'hg_app:submit_point' %}" id="post-form">
+                            {% csrf_token %}
                             {{ submit_point_form|crispy }}
-                            <button class="btn btn-primary" type="submit" aria-describedby="pointHelpBlock">Ověřit
+                            <button id="submit_point_button" class="btn btn-primary" aria-describedby="pointHelpBlock">
+                                Ověřit
                             </button>
                             <small id="pointHelpBlock" class="form-text text-muted">
                                 Ověření probíhá na základě polohy. Point zadávej v bezprostřední vzdálenosti uvedených
@@ -90,8 +91,7 @@
                                 <tr>
                                     <td>#{{ point.id }}</td>
                                     <td>
-                                        <a href="https://mapy.cz/turisticka?x={{ point.long }}&y={{ point.lat }}&z=17&source=coor&id={{ point.long }}%2C{{ point.lat }}">
-                                            {{ point.lat }}N, {{ point.long }}E</a></td>
+                                        <a href=https://mapy.cz/turisticka?x={{ point.location.x }}&y={{ point.location.y }}&z=17&source=coor&id={{ point.location.x }}%2C{{ point.location.y }}">{{ point.location.y }}N, {{ point.location.x }}E</a></td>
                                     <td>{{ point.opening_time | date:'H:i' }}</td>
                                 </tr>
                             {% endfor %}
@@ -127,36 +127,43 @@
                     var card = new SMap.Card();
                     card.getHeader().innerHTML = "<strong>Balíček #{{package.id}}</strong>";
                     card.getBody().innerHTML = "Otevření: {{ package.opening_time | date:'H:i' }}<br>";
-                    card.getBody().innerHTML += "<a href=\"https://mapy.cz/turisticka?x={{ package.long }}&y={{ package.lat }}&z=17&source=coor&id={{ package.long }}%2C{{ package.lat }}\">{{ package.lat }}N, {{ package.long }}E</a>"
+                    card.getBody().innerHTML += "<a href=\"https://mapy.cz/turisticka?x={{ package.location.x }}&y={{ package.location.y }}&z=17&source=coor&id={{ package.location.x }}%2C{{ package.location.y }}\">{{ package.location.y }}N, {{ package.location.x }}E</a>"
 
                     var options = {
                         title: "Balíček #{{ package.id }}",
                         //url: znacka,
                     };
-                    var coords = SMap.Coords.fromWGS84({{package.long}}, {{package.lat}});
+                    var coords = SMap.Coords.fromWGS84({{package.location.x}}, {{package.location.y}});
                     var marker = new SMap.Marker(coords, {{package.id}}, options);
                     marker.decorate(SMap.Marker.Feature.Card, card);
                     packages.addMarker(marker);
                 {% endfor %}
                 {% for point in points %}
                     znacka = JAK.mel("div");
-                    obrazek = JAK.mel("img", {src:SMap.CONFIG.img+"/marker/drop-blue.png"});
+                    obrazek = JAK.mel("img", {src: SMap.CONFIG.img + "/marker/drop-blue.png"});
                     znacka.appendChild(obrazek);
 
-                    popisek = JAK.mel("div", {}, {position:"absolute", left:"0px", top:"2px", textAlign:"center", width:"22px", color:"white"});
+                    popisek = JAK.mel("div", {}, {
+                        position: "absolute",
+                        left: "0px",
+                        top: "2px",
+                        textAlign: "center",
+                        width: "22px",
+                        color: "white"
+                    });
                     popisek.innerHTML = "#{{ point.id }}";
                     znacka.appendChild(popisek);
 
                     card = new SMap.Card();
                     card.getHeader().innerHTML = "<strong>Point #{{point.id}}</strong>";
                     card.getBody().innerHTML = "Otevření: {{ point.opening_time | date:'H:i' }}<br>";
-                    card.getBody().innerHTML += "<a href=\"https://mapy.cz/turisticka?x={{ point.long }}&y={{ point.lat }}&z=17&source=coor&id={{ point.long }}%2C{{ point.lat }}\">{{ point.lat }}N, {{ point.long }}E</a>"
+                    card.getBody().innerHTML += "<a href=\"https://mapy.cz/turisticka?x={{ point.location.x }}&y={{ point.location.y }}&z=17&source=coor&id={{ point.location.x }}%2C{{ point.location.y }}\">{{ point.location.y }}N, {{ point.location.x }}E</a>"
 
                     options = {
                         title: "Point #{{ point.id }}",
                         url: znacka,
                     };
-                    coords = SMap.Coords.fromWGS84({{point.long}}, {{point.lat}});
+                    coords = SMap.Coords.fromWGS84({{point.location.x}}, {{point.location.y}});
                     marker = new SMap.Marker(coords, {{point.id}}, options);
                     marker.decorate(SMap.Marker.Feature.Card, card);
                     packages.addMarker(marker);
